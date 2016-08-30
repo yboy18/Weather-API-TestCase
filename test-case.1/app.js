@@ -4,8 +4,6 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
-var test = require('./modules/test');
 var http = require('http');
 var path = require('path');
 
@@ -28,7 +26,10 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', function(){res.render('message', {title:'Conventry Node.js API - Test Case Data: 2016-08-21'});});
+app.get('/', function(req, res){
+  res.render('message', {title:'Conventry Node.js API - Test Case Data: 2016-08-21'});
+  
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
