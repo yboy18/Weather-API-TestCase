@@ -1,0 +1,102 @@
+<html>
+    <head>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title><%=title %></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+        <style>
+            #btnstart{
+                width:320px;
+                height:100px;
+                font-size:30px;
+            }
+        </style>
+        <script>
+        
+        var test_array=[
+            ['Wrong page',400 , 'https://w-api.herokuapp.com/'],
+            ['Wrong page',404 , 'https://w-api.herokuapp.com/v'],
+            ['Wrong page',404 , 'https://w-api.herokuapp.com/abcd'],
+            ['Wrong search subject',404, 'https://w-api.herokuapp.com/?s=coventry'],
+            ['Wrong city name',404, 'https://w-api.herokuapp.com/?v=convantry'],
+            ['No cityname',400, 'https://w-api.herokuapp.com/?v='],
+            ['Search Coventry',200, 'https://w-api.herokuapp.com/?v=coventry'],
+            ['First Search HK',200, 'https://w-api.herokuapp.com/?v=hong kong'],
+            ['Search USA',200, 'https://w-api.herokuapp.com/?v=usa'],
+            ['Search Tai Pei',200, 'https://w-api.herokuapp.com/?v=tai pei'],
+            ['Search London',200, 'https://w-api.herokuapp.com/?v=london'],
+            ['Search Cambridge',200, 'https://w-api.herokuapp.com/?v=cambridge'],
+            ['Search Roma',200, 'https://w-api.herokuapp.com/?v=roma'],
+            ['Search Beijing',200, 'https://w-api.herokuapp.com/?v=beijing'],
+            ['Search Shanghai',200, 'https://w-api.herokuapp.com/?v=shanghai'],
+            ['Search Limoges',200, 'https://w-api.herokuapp.com/?v=limoges'],
+            ['Search Frankfurt',200, 'https://w-api.herokuapp.com/?v=frankfurt'],
+            ['Search Zagreb',200, 'https://w-api.herokuapp.com/?v=zagreb'],
+            ['Search Rennes',200, 'https://w-api.herokuapp.com/?v=rennes'],
+            ['Search Rennes',200, 'https://w-api.herokuapp.com/?v=rennes'],
+            ['Search Rennes',200, 'https://w-api.herokuapp.com/?v=rennes'],
+            ['Search Beijing',200, 'https://w-api.herokuapp.com/?v=beijing'],
+            ['Search Hong Kong',200, 'https://w-api.herokuapp.com/?v=hong kong'],
+            ['Search Hong Kong',200, 'https://w-api.herokuapp.com/?v=hong kong']
+        ]
+        
+        $(document).ready(function(){
+            $("#btnstart").click(function(){
+                
+                for(var i=0;i<test_array.length;i++){
+                   setTimeout( postdata(i), 10000);
+                }
+                
+            });
+        });
+        
+        function postdata(ci){
+            try{
+                var sendDate = (new Date()).getTime();
+                $.ajax({type: "GET",
+                        crossDomain : true,
+                        url: test_array[ci][2],
+                        dataType: "jsonp",
+                        success: function(data, textStatus, request){
+                            
+                            var receiveDate = (new Date()).getTime();
+                
+                            var responseTimeMs = receiveDate - sendDate;
+                            $("#content").append("<tr><td>"+(ci+1)+"</td><td>"+test_array[ci][0]+"</td><td>"+test_array[ci][2]+"</td><td>"+responseTimeMs+"ms</td><td>"+test_array[ci][1]+"</td><td>"+data.code+"</td><td>"+data.source+"</td><td>OK!</td></tr>");
+                            
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            $("#content").append("<tr><td>"+(ci+1)+"</td><td>"+test_array[ci][0]+"</td><td>"+test_array[ci][2]+"</td><td>"+responseTimeMs+"ms</td><td>"+test_array[ci][1]+"</td><td>...</td><td></td><td>No reult</td></tr>");
+                          //alert(xhr.status);
+                          //alert(thrownError);
+                        }
+                });
+            }catch(ex){
+                $("#content").append("<tr><td>"+ci+"</td><td>"+test_array[ci][0]+"</td><td>"+test_array[ci][2]+"</td><td></td><td></td><td></td><td></td><td>No reult</td></tr>");
+            }
+        }
+        
+        </script>
+    </head>
+    <body>
+        <h2><%= title %></h2>
+        <button id="btnstart">Start Testing</button>
+        <table border ='1' id = "content">
+            <tr>
+                <th>ID</th>
+                <th>Descript</th>
+                <th>URL</th>
+                <th>Respond Time</th>
+                <th>Expect code</th>
+                <th>Jsonp code</th>
+                <th>Data Source</th>
+                <th>Result</th>
+            </tr>
+        </table>
+    </body>
+</html>
