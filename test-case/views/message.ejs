@@ -22,27 +22,27 @@
             ['Wrong page',400 , 'https://api-yboy.c9users.io/'],
             ['Wrong page',404 , 'https://api-yboy.c9users.io/v'],
             ['Wrong page',404 , 'https://api-yboy.c9users.io/abcd'],
-            ['Wrong search subject',404, 'https://api-yboy.c9users.io/?s=Conventry'],
-            ['Wrong city name',404, 'https://api-yboy.c9users.io/?v=Convantry'],
-            ['No cityname',404, 'https://api-yboy.c9users.io/?v='],
-            ['Search Conventry',200, 'https://api-yboy.c9users.io/?v=Conventry'],
-            ['Search Hong Kong',200, 'https://api-yboy.c9users.io/?v=Hong Kong'],
-            ['Search USA',200, 'https://api-yboy.c9users.io/?v=Conventry'],
-            ['Search Tai pei',200, 'https://api-yboy.c9users.io/?v=Tei pei'],
-            ['Search London',200, 'https://api-yboy.c9users.io/?v=London'],
-            ['Search Cambridge',200, 'https://api-yboy.c9users.io/?v=Cambridge'],
-            ['Search Roma',200, 'https://api-yboy.c9users.io/?v=Roma'],
-            ['Search Beijing',200, 'https://api-yboy.c9users.io/?v=Beijing'],
-            ['Search Shanghai',200, 'https://api-yboy.c9users.io/?v=Shanghai'],
-            ['Search Limoges',200, 'https://api-yboy.c9users.io/?v=Limoges'],
-            ['Search Frankfurt',200, 'https://api-yboy.c9users.io/?v=Frankfurt'],
-            ['Search Zagreb',200, 'https://api-yboy.c9users.io/?v=Zagreb'],
-            ['Search Rennes',200, 'https://api-yboy.c9users.io/?v=Rennes'],
-            ['Search Rennes',200, 'https://api-yboy.c9users.io/?v=Rennes'],
-            ['Search Rennes',200, 'https://api-yboy.c9users.io/?v=Rennes'],
-            ['Search Beijing',200, 'https://api-yboy.c9users.io/?v=Beijing'],
-            ['Search Hong Kong',200, 'https://api-yboy.c9users.io/?v=Hong Kong'],
-            ['Search Hong Kong',200, 'https://api-yboy.c9users.io/?v=Hong Kong']
+            ['Wrong search subject',404, 'https://api-yboy.c9users.io/?s=coventry'],
+            ['Wrong city name',404, 'https://api-yboy.c9users.io/?v=convantry'],
+            ['No cityname',400, 'https://api-yboy.c9users.io/?v='],
+            ['Search Coventry',200, 'https://api-yboy.c9users.io/?v=coventry'],
+            ['First Search HK',200, 'https://api-yboy.c9users.io/?v=hong kong'],
+            ['Search USA',200, 'https://api-yboy.c9users.io/?v=usa'],
+            ['Search Tai Pei',200, 'https://api-yboy.c9users.io/?v=tai pei'],
+            ['Search London',200, 'https://api-yboy.c9users.io/?v=london'],
+            ['Search Cambridge',200, 'https://api-yboy.c9users.io/?v=cambridge'],
+            ['Search Roma',200, 'https://api-yboy.c9users.io/?v=roma'],
+            ['Search Beijing',200, 'https://api-yboy.c9users.io/?v=beijing'],
+            ['Search Shanghai',200, 'https://api-yboy.c9users.io/?v=shanghai'],
+            ['Search Limoges',200, 'https://api-yboy.c9users.io/?v=limoges'],
+            ['Search Frankfurt',200, 'https://api-yboy.c9users.io/?v=frankfurt'],
+            ['Search Zagreb',200, 'https://api-yboy.c9users.io/?v=zagreb'],
+            ['Search Rennes',200, 'https://api-yboy.c9users.io/?v=rennes'],
+            ['Search Rennes',200, 'https://api-yboy.c9users.io/?v=rennes'],
+            ['Search Rennes',200, 'https://api-yboy.c9users.io/?v=rennes'],
+            ['Search Beijing',200, 'https://api-yboy.c9users.io/?v=beijing'],
+            ['Search Hong Kong',200, 'https://api-yboy.c9users.io/?v=hong kong'],
+            ['Search Hong Kong',200, 'https://api-yboy.c9users.io/?v=hong kong']
         ]
         
         $(document).ready(function(){
@@ -51,7 +51,7 @@
                 for(var i=0;i<test_array.length;i++){
                    setTimeout( postdata(i), 10000);
                 }
-                alert('Success!');
+                
             });
         });
         
@@ -68,6 +68,7 @@
                 
                             var responseTimeMs = receiveDate - sendDate;
                             $("#content").append("<tr><td>"+(ci+1)+"</td><td>"+test_array[ci][0]+"</td><td>"+test_array[ci][2]+"</td><td>"+responseTimeMs+"ms</td><td>"+test_array[ci][1]+"</td><td>"+data.code+"</td><td>"+data.source+"</td><td>OK!</td></tr>");
+                            
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
                             $("#content").append("<tr><td>"+(ci+1)+"</td><td>"+test_array[ci][0]+"</td><td>"+test_array[ci][2]+"</td><td>"+responseTimeMs+"ms</td><td>"+test_array[ci][1]+"</td><td>...</td><td></td><td>No reult</td></tr>");
@@ -88,11 +89,11 @@
         <table border ='1' id = "content">
             <tr>
                 <th>ID</th>
-                <th>Discript</th>
+                <th>Descript</th>
                 <th>URL</th>
-                <th>Respon Time</th>
+                <th>Respond Time</th>
                 <th>Expect code</th>
-                <th>Json code</th>
+                <th>Jsonp code</th>
                 <th>Data Source</th>
                 <th>Result</th>
             </tr>
